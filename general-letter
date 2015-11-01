@@ -1,0 +1,144 @@
+%% ---------------------------------------------------------------------------+
+%% general-letter.tex - General letter template.
+%%
+%% Author: Stephen C. Barrett
+%%         East Lansing, Michigan, USA
+%% ---------------------------------------------------------------------------+
+
+
+%% ---------------------------------------------------------------------------+
+%% Preamble
+%% ---------------------------------------------------------------------------+
+% Specify document type.
+\documentclass[draft,12pt,stdletter,orderfromtodate,sigleft]{newlfm}
+
+% ------------------------------------------------------------------ packages
+% Page layout...
+\usepackage{ifdraft}  % ...conditional selection on class draft option.
+\usepackage{framed}  % ...offsets text and lists with a surrounding box.
+
+% Text formatting...
+\usepackage[abbreviations]{foreign}  % ...foreign abbreviations.
+\usepackage{underscore}  % ...underbar resolution.
+\usepackage{url}  % ...URL line breaks, and # handling.
+\usepackage{verbatim}  % ...code fragments.
+
+% Table formatting...
+\usepackage{mdwlist}  % ...compact lists.
+\usepackage{multirow}  % ...cells spanning multiple rows.
+\usepackage{tabularx}  % ...stretched columns.
+
+% Mathematics...
+\usepackage{amssymb}  % ...extensive set of symbols.
+\usepackage{textcomp}  % ...non-math environment symbols.
+\usepackage{xfrac}  % ...slanted fractions.
+
+% Graphics...
+\usepackage{graphicx}  % ...extended \includegraphics options.
+% PdfLaTeX only! \usepackage{epstopdf}  % ...eps vector to pdf on the fly.
+
+ 
+% -------------------------------------------------------------------- macros
+% Boxed environment for note lists; enabled when in draft mode.
+% Usage: \items[{symbol}]{\item Text \item Text...}
+\newcommand{\items}[2][{$\circ$}]{
+  \ifoptiondraft{
+    \begin{framed}
+      \renewcommand{\labelitemi}{#1}  % Item symbol defaults to an open bullet.
+      \begin{itemize}
+        #2  % The list itself as individual \item entries.
+      \end{itemize}  %% Blank line above prevents nesting errors.
+    \end{framed}
+  }{}
+}
+
+
+%% ---------------------------------------------------------------------------+
+%% Document control
+%% ---------------------------------------------------------------------------+
+
+%--------------------------------------------------------------------- images
+\DeclareGraphicsExtensions{.jpg,.png,.eps,.pdf}  % Recognized file extensions.
+\graphicspath{{img/}}  % Search path with each directory in a brace pair.
+
+%------------------------------------------------------------------- settings
+\newlfmP{dateskipbefore=50pt}
+\newlfmP{sigsize=50pt}
+\newlfmP{sigskipbefore=50pt} 
+\newlfmP{Headlinewd=0pt,Footlinewd=0pt}
+ 
+\ifdraft{% Not a finished product...
+  \hbadness 10000  % ...disable underfull hbox warnings.
+  \vbadness 10000  % ...disable underfull vbox warnings.
+}
+
+\frenchspacing  % Tighten up space after a full stop.
+\makeatletter        % Prevent vertically-shifting
+\let\@texttop\relax  %   of single page letter.
+\makeatother
+
+
+%% ---------------------------------------------------------------------------+
+%% Content variables & flags
+%% ---------------------------------------------------------------------------+
+
+% --------------------------------------------------------------------- flags
+% LaTex initializes flags to false.
+
+% ------------------------------------------------------ hyphenation patterns
+\hyphenation{thres-hold}
+
+% ------------------------------------------------------ title and authorship
+\namefrom{%
+  Stephen C. Barrett \\
+  Senior Architect \\
+  \footnotesize{p: 517.319.0512 $\bullet$ m: 785.706.3268} \\
+  \footnotesize{stephen.barrett@redcedartech.com}
+}
+
+\addrfrom{%
+  6969 S. Hagadorn Rd., 3-A \\  % Remove for informal use or
+  East Lansing, MI~~48823       %   printing on letterhead.
+}
+%\phonefrom{517.319.0512}
+%\emailfrom{stephen.barrett@redcedartech.com}
+
+\addrto{%
+    Basil of Baker Street\\
+    221$\sfrac{1}{2}$ Baker Street\\
+    London, UK
+}
+ 
+
+%% ---------------------------------------------------------------------------+
+%% Start of letter
+%% ---------------------------------------------------------------------------+
+
+%--------------------------------------------------------------- front matter
+\dateset{October 31, 2015}  % Defaults to \today.
+\regarding{Nothing} 
+\greetto{To Whom It May Concern,}
+ 
+%---------------------------------------------------------------- back matter
+\closeline{Sincerely,}
+
+\psitem{Don't forget to bring some cake!}
+\ppsitem{And the ice cream!}
+
+\encllist{Photograph of a hat}
+\cclist{Prof Important Person}
+
+%---------------------------------------------------------------- main matter
+\begin{document}
+\begin{newlfm}
+I am writing to apply for the position of \ldots{}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\items{%
+  \item Thank you for your consideration.
+  \item I look forward to hearing from you.
+}
+
+\end{newlfm}
+\end{document}
