@@ -10,7 +10,7 @@
 %% Preamble
 %% ---------------------------------------------------------------------------+
 % Specify document type.
-\documentclass[draft,12pt,stdletter,orderfromtodate,sigleft]{newlfm}
+\documentclass[12pt,stdletter,orderfromtodate,sigleft]{newlfm}
 
 % ------------------------------------------------------------------ packages
 % Page layout...
